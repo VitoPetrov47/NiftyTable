@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Для адаптивной верстки-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--Подключение Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Nifty</title>
+</head>
+
+<body>
+<header class="header-main">
+    <div class="container">
+        <div class="header-content">
+            <div class="header-logo">
+                <img class="header-logo-img" src="assets/materials/icons/logo.svg">
+            </div>
+            <div class="header-nav-links">
+
+            </div>
+        </div>
+    </div>
+</header>
+<main class="main-main">
+    <div class="container">
+        <div class="main-header">
+            <div class="main-header-title">
+                <h1 class="main-h-title">Users</h1>
+            </div>
+            <button id="btnForm" class="btn-form" data-path="form-popup">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                     class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+                <span>Add user</span>
+            </button>
+        </div>
+        <div class="table-filters-main">
+            <div class="page-rows show-page-rows">
+                <p class="show-page-rows-text">Show </p>
+                <select class="select-page-rows form-select" id="itemsPerPage">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                <p class="show-page-rows-text">entries</p>
+            </div>
+            <input type="text" class="form-control" style="width: 200px" id="searchInput" placeholder="Search">
+        </div>
+
+        <div class="modals">
+            <div class="modal-overlay">
+                <div class="modal-form" data-target="form-popup">
+                    <div class="modal-form-content">
+                        <form class="form-main">
+                            <div class="form-name">
+                                <label>Name:</label>
+                                <input type="name" id="formName" class="form-name" placeholder="Name">
+                            </div>
+                            <div class="form-age">
+                                <label>Age:</label>
+                                <input type="text" id="formAge" class="form-body" placeholder="Age">
+                            </div>
+                            <div class="form-gender">
+                                <label>Gender:</label>
+                                <select id="formGender" class="form-gender">
+                                    <option disabled selected>Choose gender</option>
+                                    <option>male</option>
+                                    <option>female</option>
+                                </select>
+                            </div>
+                            <div class="form-color">
+                                <label>Color:</label>
+                                <select id="form-color-select">
+                                    <option disabled selected>Select color</option>
+                                </select>
+                            </div>
+                            <div class="form-preference">
+                                <label>Preference:</label>
+                                <input type="checkbox" id="formPreference" class="form-preference">
+                            </div>
+
+                            <div class="form-buttons">
+                                <button type="submit" id="addUser" class="add-user">Add Comment</button>
+                                <button type="submit" id="cleanStorage" class="comment-storage">Clean
+                                    Storage</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-edit">
+            <div class="modal-edit-overlay">
+                <div class="modal-edit-form" data-target="form-edit-popup">
+                    <div class="modal-edit-form-content">
+                        <form class="form-edit-main">
+                            <div class="form-edit-name">
+                                <label>Name:</label>
+                                <input type="name" id="formEditName" class="form-edit-name" placeholder="Name">
+                            </div>
+                            <div class="form-edit-age">
+                                <label>Age:</label>
+                                <input type="text" id="formEditAge" class="form-edit-body" placeholder="Age">
+                            </div>
+                            <div class="form-edit-gender">
+                                <label>Gender:</label>
+                                <select id="formEditGender" class="form-edit-gender">
+                                </select>
+                            </div>
+                            <div class="form-edit-color">
+                                <label>Color:</label>
+                                <select id="form-edit-color-select">
+                                </select>
+                            </div>
+                            <div class="form-edit-preference">
+                                <label>Preference:</label>
+                                <input type="checkbox" id="formEditPreference" class="form-edit-preference">
+                            </div>
+
+                            <div class="form-edit-buttons">
+                                <button type="submit" class="confirm-edit-form">Edit confirm</button>
+                                <button id="cancelEditForm" class="cancel-edit-form">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="table" class="table">
+            <thead class="table-header">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">
+                    <div style="width: 100%" id="tableSortName">
+                        <div style="display: flex; justify-content: space-between; align-items: center">
+                            <p style="font-weight: 700; margin: 0">Name</p>
+                            <div class="tableImg">
+                                <img id="sortStatusName" class="sortStatus"
+                                     src="assets/materials/icons/empty.svg">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">
+                    <div style="width: 100%" id="tableSortAge">
+                        <div style="display: flex; justify-content: space-between; align-items: center">
+                            <p style="font-weight: 700; margin: 0">Age</p>
+                            <div class="tableImg">
+                                <img id="sortStatusAge" class="sortStatus"
+                                     src="assets/materials/icons/empty.svg">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col"><div style="width: 100%" id="tableSortGender">
+                    <div style="display: flex; justify-content: space-between; align-items: center">
+                        <p style="font-weight: 700; margin: 0">Gender</p>
+                        <div class="tableImg">
+                            <img id="sortStatusGender" class="sortStatus"
+                                 src="assets/materials/icons/empty.svg">
+                        </div>
+                    </div>
+                </div></th>
+                <th scope="col" style="text-align: left;">Favorite Color</th>
+                <th scope="col"><div style="width: 100%" id="tableSortCheesePrefer">
+                    <div style="display: flex; justify-content: space-between; align-items: center">
+                        <p style="font-weight: 700; margin: 0">Status</p>
+                        <div class="tableImg">
+                            <img id="sortStatusCheesePrefer" class="sortStatus"
+                                 src="assets/materials/icons/empty.svg">
+                        </div>
+                    </div>
+                </div></th>
+                <th>
+                    <div>
+                        Edit
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        Delete
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="tableBody" class="table-body">
+
+            </tbody>
+        </table>
+
+        <div class="page-navigations">
+            <div class="page-navigation-show-pages">
+                Info about pages
+            </div>
+            <div class="pagination">
+                <button class="prev-page-btn" id="prevPageBtn">Previous</button>
+                <div id="pagination"></div>
+                <button class="next-page-btn" id="nextPageBtn">Next</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="script/script.js"></script>
+<!--Подключение Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
